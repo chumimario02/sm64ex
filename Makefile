@@ -357,6 +357,9 @@ ifeq ($(TARGET_RPI),1)
 
                 ifneq (,$(findstring 3,$(model)))
                          OPT_FLAGS := -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -O3
+                else ifneq (,$(findstring Zero 2,$(model)))
+                         # Raspberry Pi Zero 2 W: Cortex-A53 (ARMv8-A in AArch32)
+                         OPT_FLAGS := -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -O3
                          else
                          OPT_FLAGS := -march=armv7-a -mtune=cortex-a7 -mfpu=neon-vfpv4 -O3
                 endif
@@ -370,6 +373,9 @@ ifeq ($(TARGET_RPI),1)
                          OPT_FLAGS := -march=armv8-a+crc -mtune=cortex-a53 -O3
                 else ifneq (,$(findstring 4,$(model)))
                          OPT_FLAGS := -march=armv8-a+crc+simd -mtune=cortex-a72 -O3
+                else ifneq (,$(findstring Zero 2,$(model)))
+                         # Raspberry Pi Zero 2 W (64-bit OS): Cortex-A53
+                         OPT_FLAGS := -march=armv8-a+crc -mtune=cortex-a53 -O3
                 endif
 
         endif
